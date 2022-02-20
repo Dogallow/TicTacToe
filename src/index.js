@@ -50,6 +50,8 @@ function Square(props) {
     }
 
     handleClick(i){
+            let winner = calculateWinner(this.state.value)
+            if(this.state.value[i] === "x" || this.state.value[i] === "o" || winner) return
             if(this.state.xIsNext){
                 // Creating a copy of the state array. This is due to the slice method
                 const value = this.state.value.slice()
@@ -68,7 +70,15 @@ function Square(props) {
     }
   
     render() {
-      const status = `Next Player is ${this.state.xIsNext? "o":"x"}`;
+        // Small Note pay attention to the value of null throughout this logic
+        const winner = calculateWinner(this.state.value)
+        let status
+        if (winner){
+            status = `Winner ${winner}`
+        } else {
+            status = `Next Player ${this.state.xIsNext? "o" : "x"}`
+        }
+      
   
       return (
         <div>
@@ -116,6 +126,33 @@ ReactDOM.render(
     document.getElementById('root')
   );
   
+  function calculateWinner(value) {
+    //   Really need to understand this logic in this function
+    const lines = [
+        // This is a list of possible combinations that will win the game.
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6],
+    ];
+    // Looping through the lines variable 
+    for (let i = 0; i < lines.length; i++) {
+      const [a, b, c] = lines[i];
+      if (value[a] && value[a] === value[b] && value[a] === value[c]) {
+          console.log(value[a], value[b], value[c])
+        return value[a];
+      }
+    }
+    return null;
+  }
+
+
+
+
 
 
   // Pay attention to the syntax when setting state with class-based components
