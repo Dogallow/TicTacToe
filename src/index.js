@@ -68,7 +68,7 @@ function Square(props) {
                     // Then setting state as the updated array and replacing the original array with the copied array
                     this.setState({value:value})
                     this.setState({xIsNext: !true})
-                    this.setState({history: {value}})
+                    
                     
                     
                     
@@ -80,7 +80,7 @@ function Square(props) {
                 this.setState({xIsNext:!false})
                 
             }
-            console.log(this.state.history)
+            
             
         
     }
