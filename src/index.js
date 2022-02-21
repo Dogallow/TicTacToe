@@ -33,7 +33,8 @@ function Square(props) {
 
         this.state = {
             value: [null,null,null,null,null,null,null,null,null],
-            xIsNext: true
+            xIsNext: true,
+            history: []
         }
     }
     
@@ -49,6 +50,7 @@ function Square(props) {
       />;
     }
 
+    
     handleClick(i){
             let winner = calculateWinner(this.state.value)
             if(this.state.value[i] === "x" || this.state.value[i] === "o" || winner) return
@@ -56,17 +58,31 @@ function Square(props) {
                 // Creating a copy of the state array. This is due to the slice method
                 const value = this.state.value.slice()
                 // Then modifying the copied array at the specific index
-                    value[i] = "o"
+                value[i] = "o"
+                
+                
+                
+                    
+
+
                     // Then setting state as the updated array and replacing the original array with the copied array
                     this.setState({value:value})
                     this.setState({xIsNext: !true})
+                    this.setState({history: {value}})
+                    
+                    
+                    
 
             }else {
                 const value = this.state.value.slice()
                 value[i] = "x"
                 this.setState({value: value})
                 this.setState({xIsNext:!false})
+                
             }
+            console.log(this.state.history)
+            
+        
     }
   
     render() {
@@ -143,7 +159,7 @@ ReactDOM.render(
     for (let i = 0; i < lines.length; i++) {
       const [a, b, c] = lines[i];
       if (value[a] && value[a] === value[b] && value[a] === value[c]) {
-          console.log(value[a], value[b], value[c])
+        //   console.log(value[a], value[b], value[c])
         return value[a];
       }
     }
@@ -156,3 +172,6 @@ ReactDOM.render(
 
 
   // Pay attention to the syntax when setting state with class-based components
+//   BEING ABLE TO COME UP WITH THE LOGIC IN THESE FUNCTIONS IS CRITICAL THEN UNDERSTANDING HOW TO APPLY THESE THINGS (STRUCTURE) IS AS CRUCIAL
+
+// todo Can add scoreboard functionality this will be in calculate winner function or will this be its own function with the calculate winner function in that
