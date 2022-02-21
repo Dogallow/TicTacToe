@@ -34,7 +34,7 @@ function Square(props) {
         this.state = {
             value: [null,null,null,null,null,null,null,null,null],
             xIsNext: true,
-            history: []
+            
         }
     }
     
